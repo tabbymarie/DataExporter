@@ -7,6 +7,10 @@ php:
   - 5.5
 
 before_script:
-    - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
+  #- COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
+  - composer self-update
+  - composer install --dev --prefer-source --no-interaction > /dev/null
 
-script: phpunit --coverage-text
+script:
+  - bin/phpspec run -fpretty --verbose
+  - phpunit --coverage-text
