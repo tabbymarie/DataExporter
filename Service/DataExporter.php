@@ -368,7 +368,7 @@ class DataExporter
                     $obj = $hooks[$column][0];
                     $data = $obj->$hooks[$column][1]($data);
                 } elseif ($refl->isStatic()) {
-                    $data = $hooks[$column][0]::$hooks[$column][1]($data);
+                    $data = call_user_func($hooks[$column][0] . '::' . $hooks[$column][1], $data);
                 } else {
                     $obj = new $hooks[$column][0];
                     $data = $obj->$hooks[$column][1]($data);
