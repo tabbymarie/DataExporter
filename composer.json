@@ -1,5 +1,5 @@
 {
-    "name": "piotrantosik/dataexporter-bundle",
+    "name": "andreybolonin/dataexporter-bundle",
     "type": "symfony-bundle",
     "description": "Easy export data to CSV, XML, HTML, JSON or XLS",
     "keywords": ["exporter","csv","xls", "xml", "json"],
