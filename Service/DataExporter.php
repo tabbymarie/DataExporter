@@ -370,12 +370,16 @@ class DataExporter
                 $refl = new \ReflectionMethod($hooks[$column][0], $hooks[$column][1]);
                 if (is_object($hooks[$column][0])) {
                     $obj = $hooks[$column][0];
-                    $data = $obj->$hooks[$column][1]($data);
+                    $method = $hooks[$column][1];
+                    $data = $obj->$method($data);
                 } elseif ($refl->isStatic()) {
                     $data = call_user_func($hooks[$column][0] . '::' . $hooks[$column][1], $data);
                 } else {
-                    $obj = new $hooks[$column][0];
-                    $data = $obj->$hooks[$column][1]($data);
+                    $object = $hooks[$column][0];
+                    $obj = new $object;
+
+                    $method = $hooks[$column][1];
+                    $data = $obj->$method($data);
                 }
             }
         }
