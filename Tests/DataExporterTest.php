@@ -9,7 +9,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 {
     public function testCSVExport()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['fileName' => 'file', 'separator' => ';']);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $data = [
@@ -26,7 +26,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testXLSExport()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'xls', 'fileName' => 'file']);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $data = [
@@ -42,7 +42,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testCSVExportFromObject()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'csv', 'fileName' => 'file', 'separator' => ';']);
         $testObject = new TestObject();
 
@@ -57,7 +57,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testXLSExportFromObject()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'xls', 'fileName' => 'file']);
         $testObject = new TestObject();
 
@@ -72,7 +72,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testHTMLExport()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'html', 'fileName' => 'file']);
         $exporter->setColumns(['[col1]' => 'Column 1', '[col2]' => 'Column 2', '[col3]' => 'Column 3']);
         $data = [
@@ -88,7 +88,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testXMLExport()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'xml', 'fileName' => 'file', 'charset' => 'ISO-8859-2']);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $data = [
@@ -109,7 +109,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testJSONExport()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'json', 'fileName' => 'file']);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $data = [
@@ -125,7 +125,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testJSONMemoryEscapeExport()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'json', 'memory' => true]);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $data = [
@@ -142,7 +142,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testHookExport()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'json', 'fileName' => 'file']);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $exporter->addHook(['AntQa\Bundle\DataExporterBundle\Test\Service\DataExporterTest', 'hookTest'], '[col1]');
@@ -160,7 +160,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testHookClosureExport()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'json', 'fileName' => 'file']);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
 
@@ -184,7 +184,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
 
     public function testCSVExportSkipHeader()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['fileName' => 'file', 'separator' => ';', 'skipHeader' => true]);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $data = [
@@ -203,7 +203,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
      */
     public function testExportSkipHeaderException()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'html', 'fileName' => 'file', 'separator' => ';', 'skipHeader' => true]);
     }
 
@@ -222,7 +222,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
      */
     public function testHookNonParameter()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'json', 'fileName' => 'file']);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $exporter->addHook(['AntQa\Bundle\DataExporterBundle\Test\Service\DataExporterTest'], '[col1]');
@@ -233,7 +233,7 @@ class DataExporterTest extends \PHPUnit_Framework_TestCase
      */
     public function testHookNonFunctionExist()
     {
-        $exporter = new DataExporter([], $this->getMock('Symfony\Component\Templating\EngineInterface'));
+        $exporter = new DataExporter([], $this->createMock('Symfony\Component\Templating\EngineInterface'));
         $exporter->setOptions(['format' => 'json', 'fileName' => 'file']);
         $exporter->setColumns(['[col1]', '[col2]', '[col3]']);
         $exporter->addHook(['AntQa\Bundle\DataExporterBundle\Test\Service\DataExporterTest', 'hookTestNon'], '[col1]');
