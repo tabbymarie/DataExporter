@@ -8,7 +8,6 @@ use Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -110,7 +109,10 @@ class DataExporter
         }
     }
 
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
                 'format' => 'csv',
@@ -163,23 +165,19 @@ class DataExporter
                         return null;
                     }
             ]);
-        $resolver->setAllowedValues([
-                'format' => ['csv', 'xls', 'html', 'xml', 'json', 'pdf', 'listData', 'render']
-            ]);
-        $resolver->setAllowedTypes([
-                'charset' => 'string',
-                'fileName' => 'string',
-                'memory' => ['null', 'bool'],
-                'skipHeader' => ['null', 'bool'],
-                'separator' => ['null', 'string'],
-                'escape' => ['null', 'string'],
-                'allowNull' => 'bool',
-                'nullReplace' => 'bool',
-                'template' => ['null', 'string'],
-                'template_vars' => 'array',
-                'pdfOptions' => ['null', 'array'],
-                'onlyContent' => ['null', 'bool']
-            ]);
+        $resolver->setAllowedValues('format', ['csv', 'xls', 'html', 'xml', 'json', 'pdf', 'listData', 'render']);
+        $resolver->setAllowedTypes('charset', 'string');
+        $resolver->setAllowedTypes('fileName', 'string');
+        $resolver->setAllowedTypes('memory', ['null', 'bool']);
+        $resolver->setAllowedTypes('skipHeader', ['null', 'bool']);
+        $resolver->setAllowedTypes('separator', ['null', 'string']);
+        $resolver->setAllowedTypes('escape', ['null', 'string']);
+        $resolver->setAllowedTypes('allowNull', 'bool');
+        $resolver->setAllowedTypes('nullReplace', 'bool');
+        $resolver->setAllowedTypes('template', ['null', 'string']);
+        $resolver->setAllowedTypes('template_vars', 'array');
+        $resolver->setAllowedTypes('pdfOptions', ['null', 'array']);
+        $resolver->setAllowedTypes('onlyContent', ['null', 'bool']);
     }
 
     /**
@@ -270,11 +268,17 @@ class DataExporter
         return $this->options['escape'];
     }
 
+    /**
+     * @return mixed
+     */
     private function getAllowNull()
     {
         return $this->options['allowNull'];
     }
 
+    /**
+     * @return mixed
+     */
     private function getNullReplace()
     {
         return $this->options['nullReplace'];
